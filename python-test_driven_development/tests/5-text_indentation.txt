@@ -1,0 +1,124 @@
+This file contains doctests for the function text_indentation.
+
+The text_indentation function prints text with 2 new lines after '.', '?', ':'.
+
+>>> text_indentation = __import__("5-text_indentation").text_indentation
+
+Basic usage with period.
+
+>>> text_indentation("Hello. World")
+Hello.
+<BLANKLINE>
+World
+
+Basic usage with question mark.
+
+>>> text_indentation("How are you? I am fine")
+How are you?
+<BLANKLINE>
+I am fine
+
+Basic usage with colon.
+
+>>> text_indentation("Title: Content")
+Title:
+<BLANKLINE>
+Content
+
+Multiple delimiters.
+
+>>> text_indentation("Hello. How are you? Good: thanks")
+Hello.
+<BLANKLINE>
+How are you?
+<BLANKLINE>
+Good:
+<BLANKLINE>
+thanks
+
+Spaces after delimiters are removed.
+
+>>> text_indentation("Hello.   World")
+Hello.
+<BLANKLINE>
+World
+
+No delimiters.
+
+>>> text_indentation("Hello World")
+Hello World
+
+Empty string.
+
+>>> text_indentation("")
+
+Only spaces.
+
+>>> text_indentation("   ")
+   
+
+Delimiter at the end.
+
+>>> text_indentation("Hello.")
+Hello.
+<BLANKLINE>
+
+Multiple delimiters in a row.
+
+>>> text_indentation("Test.?:")
+Test.
+<BLANKLINE>
+?
+<BLANKLINE>
+:
+<BLANKLINE>
+
+text must be a string.
+
+>>> text_indentation(123)
+Traceback (most recent call last):
+...
+TypeError: text must be a string
+
+text cannot be None.
+
+>>> text_indentation(None)
+Traceback (most recent call last):
+...
+TypeError: text must be a string
+
+text cannot be a list.
+
+>>> text_indentation(["Hello"])
+Traceback (most recent call last):
+...
+TypeError: text must be a string
+
+Missing argument.
+
+>>> text_indentation()
+Traceback (most recent call last):
+...
+TypeError: text_indentation() missing 1 required positional argument: 'text'
+
+Spaces before and after delimiter.
+
+>>> text_indentation("Hello  .  World")
+Hello  .
+<BLANKLINE>
+World
+
+Long text with multiple spaces after delimiter.
+
+>>> text_indentation("First.     Second")
+First.
+<BLANKLINE>
+Second
+
+Text with newlines (newlines are preserved as regular characters).
+
+>>> text_indentation("Hello.\nWorld")
+Hello.
+<BLANKLINE>
+<BLANKLINE>
+World
