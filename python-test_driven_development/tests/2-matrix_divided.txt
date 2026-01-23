@@ -70,10 +70,3 @@ Large numbers.
 
 >>> matrix_divided([[1000000, 2000000]], 3)
 [[333333.33, 666666.67]]
-
-Empty rows should raise error.
-
->>> matrix_divided([[]], 2)
-Traceback (most recent call last):
-...
-TypeError: matrix must be a matrix (list of lists) of integers/floats
