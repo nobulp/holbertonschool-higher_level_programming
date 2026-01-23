@@ -7,7 +7,6 @@ This module provides a function that divides all elements of a matrix.
 def matrix_divided(matrix, div):
     """
     Divides all elements of a matrix by a given number.
-
     Returns a new matrix with results rounded to 2 decimal places.
     """
     if (not isinstance(matrix, list) or matrix == [] or
@@ -29,5 +28,8 @@ def matrix_divided(matrix, div):
 
     if div == 0:
         raise ZeroDivisionError("division by zero")
+
+    if div == float("inf"):
+        return [[0.0 for _ in row] for row in matrix]
 
     return [[round(elem / div, 2) for elem in row] for row in matrix]
