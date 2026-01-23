@@ -55,3 +55,25 @@ division by zero is not allowed.
 Traceback (most recent call last):
 ...
 ZeroDivisionError: division by zero
+
+Division by infinity returns 0.0.
+
+>>> matrix_divided([[1, 2, 3], [4, 5, 6]], float('inf'))
+[[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+
+Negative numbers.
+
+>>> matrix_divided([[-1, -2], [-3, -4]], 2)
+[[-0.5, -1.0], [-1.5, -2.0]]
+
+Large numbers.
+
+>>> matrix_divided([[1000000, 2000000]], 3)
+[[333333.33, 666666.67]]
+
+Empty rows should raise error.
+
+>>> matrix_divided([[]], 2)
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
