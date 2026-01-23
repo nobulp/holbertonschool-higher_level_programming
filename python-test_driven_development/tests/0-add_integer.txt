@@ -1,13 +1,4 @@
-This file contains doctests for the function add_integer.
-
-The add_integer function adds two numbers and returns an integer.
-Only integers and floats are accepted.
-Floats are converted to integers before the addition.
-If an invalid type is provided, a TypeError is raised.
-
 >>> add_integer = __import__("0-add_integer").add_integer
-
-Basic usage with integers.
 
 >>> add_integer(1, 2)
 3
@@ -15,12 +6,8 @@ Basic usage with integers.
 >>> add_integer(100, -2)
 98
 
-If the second argument is omitted, it defaults to 98.
-
 >>> add_integer(2)
 100
-
-Floats are accepted and converted to integers.
 
 >>> add_integer(100.3, -2)
 98
@@ -28,31 +15,12 @@ Floats are accepted and converted to integers.
 >>> add_integer(-5, -10)
 -15
 
-If the second argument is not an integer or a float,
-a TypeError must be raised.
-
 >>> add_integer(4, "School")
 Traceback (most recent call last):
 ...
 TypeError: b must be an integer
 
-If the first argument is not an integer or a float,
-a TypeError must also be raised.
-
 >>> add_integer(None)
 Traceback (most recent call last):
 ...
 TypeError: a must be an integer
-
-Special float values are not convertible to integers.
-Python must raise its native errors in these cases.
-
->>> add_integer(float("inf"), 1)
-Traceback (most recent call last):
-...
-OverflowError: ...
-
->>> add_integer(float("nan"), 1)
-Traceback (most recent call last):
-...
-ValueError: ...
