@@ -1,0 +1,48 @@
+This file contains tests for the function add_integer.
+The goal of this function is to add two numbers and return an integer.
+
+The function only accepts integers and floats.
+If a float is provided, it is first converted to an integer.
+If an invalid type is provided, a TypeError must be raised with
+the appropriate error message.
+
+We start by importing the function to test.
+
+>>> add_integer = __import__("0-add_integer").add_integer
+
+Basic usage with two integers.
+
+>>> add_integer(1, 2)
+3
+
+>>> add_integer(100, -2)
+98
+
+If the second argument is not provided, it defaults to 98.
+
+>>> add_integer(2)
+100
+
+Floats are accepted but are converted to integers before addition.
+
+>>> add_integer(100.3, -2)
+98
+
+>>> add_integer(-5, -10)
+-15
+
+If the second argument is not an integer or a float,
+the function must raise a TypeError with the correct message.
+
+>>> add_integer(4, "School")
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
+
+If the first argument is not an integer or a float,
+the function must also raise a TypeError.
+
+>>> add_integer(None)
+Traceback (most recent call last):
+...
+TypeError: a must be an integer
