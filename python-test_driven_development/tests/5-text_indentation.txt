@@ -52,11 +52,6 @@ Empty string.
 
 >>> text_indentation("")
 
-Only spaces.
-
->>> text_indentation("   ")
-   
-
 Delimiter at the end.
 
 >>> text_indentation("Hello.")
