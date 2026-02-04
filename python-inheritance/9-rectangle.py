@@ -9,7 +9,7 @@ class Rectangle(BaseGeometry):
     """Rectangle class."""
 
     def __init__(self, width, height):
-        """Initializes a Rectangle instance."""
+        """Initializes a Rectangle."""
         self.integer_validator("width", width)
         self.integer_validator("height", height)
         self.__width = width
@@ -18,3 +18,7 @@ class Rectangle(BaseGeometry):
     def area(self):
         """Returns the area of the rectangle."""
         return self.__width * self.__height
+
+    def __str__(self):
+        """Returns the string representation of the rectangle."""
+        return f"[Rectangle] {self.__width}/{self.__height}"
