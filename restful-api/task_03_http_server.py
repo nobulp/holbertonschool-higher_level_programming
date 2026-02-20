@@ -1,61 +1,58 @@
 #!/usr/bin/python3
-"""Minimal Flask API (users)."""
-
-from flask import Flask, jsonify, request
-
-app = Flask(__name__)
-users = {}
-
-
-@app.route("/", methods=["GET"])
-def home():
-    return "Welcome to the Flask API!"
+"""
+Simple API using the http.server module.
+"""
+import http.server
+import json
 
 
-@app.route("/data", methods=["GET"])
-def data():
-    return jsonify(list(users))
+class SimpleAPIHandler(http.server.BaseHTTPRequestHandler):
+    """
+    HTTP request handler for a simple API.
+    Handles GET requests for multiple endpoints.
+    """
+
+    def do_GET(self):
+        """
+        Handle GET requests and route to appropriate endpoint.
+        """
+        if self.path == '/':
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(b"Hello, this is a simple API!")
+
+        elif self.path == '/data':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            data = {"name": "John", "age": 30, "city": "New York"}
+            self.wfile.write(json.dumps(data).encode())
+
+        elif self.path == '/status':
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(b"OK")
+
+        elif self.path == '/info':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            info = {
+                "version": "1.0",
+                "description": "A simple API built with http.server"
+            }
+            self.wfile.write(json.dumps(info).encode())
+
+        else:
+            self.send_response(404)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(b"Endpoint not found")
 
 
-@app.route("/status", methods=["GET"])
-def status():
-    return "OK"
-
-
-@app.route("/users/<username>", methods=["GET"])
-def get_user(username):
-    u = users.get(username)
-    if not u:
-        return jsonify(error="User not found"), 404
-    return jsonify(u)
-
-
-def _build_user(payload):
-    return {
-        "username": payload["username"],
-        "name": payload.get("name", ""),
-        "age": payload.get("age", 0),
-        "city": payload.get("city", "")
-    }
-
-
-@app.route("/add_user", methods=["POST"])
-def add_user():
-    if not request.is_json:
-        return jsonify(error="Invalid JSON"), 400
-
-    payload = request.get_json()
-
-    username = payload.get("username")
-    if not username:
-        return jsonify(error="Username is required"), 400
-
-    if username in users:
-        return jsonify(error="Username already exists"), 409
-
-    users[username] = _build_user(payload)
-    return jsonify(message="User added", user=users[username]), 201
-
-
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    server = http.server.HTTPServer(('', 8000), SimpleAPIHandler)
+    print("Server running on port 8000...")
+    server.serve_forever()
