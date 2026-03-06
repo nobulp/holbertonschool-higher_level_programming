@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Display states whose name matches the provided argument."""
+"""Display states matching the given name safely."""
 
 import sys
 import MySQLdb
@@ -16,10 +16,8 @@ if __name__ == "__main__":
     )
 
     cursor = conn.cursor()
-    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(
-        sys.argv[4]
-    )
-    cursor.execute(query)
+    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+    cursor.execute(query, (sys.argv[4],))
 
     for state in cursor.fetchall():
         print(state)
